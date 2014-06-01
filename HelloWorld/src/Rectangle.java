@@ -1,14 +1,12 @@
-// class for Square implementation of shape
-// user 'extends' to inherit from a class, and 'implements' to use an iterface
-public class Square extends Shape{
-
+// Rectangle implementation of shape
+public class Rectangle extends Shape{
 	// Super allows inheritance from superclass constructer
-	public Square(){
+	public Rectangle(){
 		super();
 		this.setNSides(4);
 	}
-	public Square(double w){
-		super(w,w);
+	public Rectangle(double w, double h){
+		super(w,h);
 		this.setNSides(4);
 	}
 	
@@ -20,7 +18,7 @@ public class Square extends Shape{
 	// A method declared final cannot be overridden
 	public void printSides(){
 		super.printSides();
-		System.out.println("A square always has "+this.getNSides()+" sides");
+		System.out.println("A rectangle always has "+this.getNSides()+" sides");
 	}
-	
+
 }

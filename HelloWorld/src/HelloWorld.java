@@ -3,12 +3,13 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.text.*;
 import java.io.*;
+import javax.activation.*;
 /*first test program with java stuff
 * Convention: class names start with capital letter, method names start lower case
 * class name must match the src file name exactly.
 * There can only be one public class per file (many private classes)
 */ 
-public class HelloWorld {
+public abstract class HelloWorld {
 	/* This is my first java program.  
     * This will print 'Hello World' as the output   */
 
@@ -20,15 +21,25 @@ public class HelloWorld {
 		//testFileIO();
 		//testStdIO();
 		//testExceptions();
-		Square sq = new Square(3,5);
+		//testHashMaps();
+		sendEmail();
+		
+		/*Square sq = new Square(3);
 		println("Square Width = "+sq.getWidth()+", Height = "+sq.getHeight()+", Area = "+sq.calcArea());
 		
 		Triangle tr = new Triangle(3,5);
 		println("Triangle Width = "+tr.getWidth()+", Height = "+tr.getHeight()+", Area = "+tr.calcArea());
 		
+		sq.printSides();
+		tr.printSides();
+		*/
 	}
 
+	// Generic or template method
 	static<T> void println(T arg) { System.out.println(arg); }
+	
+	// Can restrict the types of argument which can go to a template
+	abstract <T extends Comparable<T>> T maximum(T x, T y, T z);
 	
 	public static void printArray(double[] array) {
 		  for (int i = 0; i < array.length; i++) {
@@ -122,7 +133,38 @@ public class HelloWorld {
 	       
 	       java.util.Arrays.sort(array);
 	       printArray(array);
-		
+	       
+	       // vectors exist too!
+	       Vector v = new Vector(0);
+	       v.addElement(new Double(4.0));
+	       v.addElement(new Double(3.2));
+	       v.addElement(new Double(2.4));
+	       v.addElement(5.6);
+	       v.addElement("test");
+	       println("Vector capacity: "+v.size());
+	       println("First Element: "+v.firstElement()+" Last element: "+v.lastElement());
+	       println(v.contains(3.2));
+	       println(v.elementAt(0));
+	       
+	       for(int i=0; i<v.size(); i++){
+	    	   System.out.print(v.elementAt(i)+"\t");
+	       }
+	       println("");
+	       
+	       Enumeration vEnum = v.elements();
+	       while(vEnum.hasMoreElements()){ System.out.print(vEnum.nextElement() + " "); }
+	       System.out.println();
+	       
+	       //ArrayList replaces Vector from Java 2
+	       ArrayList a = new ArrayList();
+	       a.add(2);
+	       a.add(3.4);
+	       a.add(7.2);
+	       a.add("string");
+	       
+	       for(int i=0; i<a.size(); i++){
+	    	   println(a.get(i));
+	       }
 	}
 
 	public static void testDates(){
@@ -273,7 +315,35 @@ public class HelloWorld {
 		// See tutorial for creating your own exceptions (Checking account class)
 	}
 	
+	public static void testHashMaps(){
+		//HashMaps is a list of keys linked with an object
+		HashMap m = new HashMap();
+		m.put("2H",0);
+		m.put("3H", 1);
+		m.put("AH",2); //etc
+		println("HashMap Elements:");
+		System.out.print("\t"+m);
+		println("");
+		println("Key for 3H= "+m.get("3H"));
+		
+		// Can make a set to iterate over the map
+		Set set = m.keySet();
+		println("Size of set= "+set.size());
+		Iterator<String> it = set.iterator();
+		while(it.hasNext()){
+			println(it.next());
+		}
+		
+		// straight to array?
+		Object[] cardNames=m.keySet().toArray();
+		for(Object name: cardNames){
+			println(name);
+		}
+	}
 	
+	public static void sendEmail(){
+		
+	}
 	// can add a finalize method to be run just before object is destroyed
 	protected void finalize(){
 		println("Finalising HelloWorld object");
